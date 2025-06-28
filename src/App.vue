@@ -60,7 +60,8 @@ export default {
         { id: 2, name: 'テキストエディタ', icon: '📝', x: 50, y: 150 },
         { id: 3, name: '計算機', icon: '🧮', x: 50, y: 250 },
         { id: 4, name: 'ブラウザ', icon: '🌐', x: 50, y: 350 },
-        { id: 5, name: '設定', icon: '⚙️', x: 150, y: 50 }
+        { id: 5, name: '設定', icon: '⚙️', x: 150, y: 50 },
+        { id: 6, name: 'パーティクル', icon: '✨', x: 150, y: 150 }
       ],
       openWindows: []
     }
@@ -159,6 +160,26 @@ export default {
                 <option>ライト</option>
                 <option>ダーク</option>
               </select>
+            </div>
+          </div>
+        `,
+        'パーティクル': `
+          <div class="particle-app">
+            <div class="particle-controls">
+              <div class="control-group">
+                <label>パーティクル数:</label>
+                <input type="range" id="particleCount" min="1000" max="50000" value="10000" step="1000">
+                <span id="particleCountValue">10000</span>
+              </div>
+              <div class="control-group">
+                <button onclick="toggleParticles()" id="toggleBtn">開始</button>
+                <button onclick="resetParticles()">リセット</button>
+              </div>
+            </div>
+            <canvas id="particleCanvas" width="560" height="320" style="background: #000; border: 1px solid #333; cursor: crosshair;"></canvas>
+            <div class="particle-info">
+              <p>マウスでパーティクルと相互作用できます</p>
+              <p>WebGPU非対応ブラウザではCanvas 2Dで動作します</p>
             </div>
           </div>
         `
@@ -272,5 +293,82 @@ export default {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.particle-app {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.particle-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 6px;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.control-group label {
+  font-weight: 500;
+  min-width: 80px;
+}
+
+.control-group input[type="range"] {
+  width: 120px;
+}
+
+.control-group button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.control-group button:first-of-type {
+  background: #4CAF50;
+  color: white;
+}
+
+.control-group button:first-of-type:hover {
+  background: #45a049;
+}
+
+.control-group button:last-of-type {
+  background: #2196F3;
+  color: white;
+}
+
+.control-group button:last-of-type:hover {
+  background: #1976D2;
+}
+
+#particleCanvas {
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.particle-info {
+  margin-top: 10px;
+  padding: 10px;
+  background: #e8f4f8;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #666;
+}
+
+.particle-info p {
+  margin: 2px 0;
 }
 </style>
