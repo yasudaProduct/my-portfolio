@@ -58,3 +58,6 @@ temp/
 
 # Vite
 .vite
+
+# Claude settings
+.claude/
